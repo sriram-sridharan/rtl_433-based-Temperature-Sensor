@@ -139,7 +139,9 @@ while True:
 			except urllib2.URLError:
 				print >> sys.stderr, "Error connecting to IFTTT"
 			# IFTTT error handling complete
-	# Error handling (out of battery, out of range, etc.) complete
+		# If there are errors, no point in proceeding any further
+		continue
+		# Error handling (out of battery, out of range, etc.) complete
 	# PRTG error handling start
 	try:
 		contents = urllib2.urlopen(living_url)
