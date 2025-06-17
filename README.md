@@ -31,7 +31,7 @@ Rename `config.ini.bak` to `config.ini`, add your sensor IDs and PRTG installati
 
 ### Build
 
-- Building the image is easy: `docker build .`
+- Building the image is easy: `docker build -t 433-temp:latest .`
 - If you use Docker Hub or a similar registry, you can tag the image like so: `docker build -t username/433-temp:latest .`
 - You can force download the latest version of all dependencies by using the `--no-cache` flag.
 - Finally, you can push the freshly built image to your registry with: `docker push username/433-temp:latest`
