@@ -1,0 +1,5 @@
+[Sensors]
+ids = # comma separated list of your sensor IDs
+
+[PRTG]
+url = # your PRTG URL
