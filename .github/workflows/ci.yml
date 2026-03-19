@@ -27,6 +27,7 @@ jobs:
         run: |
           docker run --rm \
             -v $(pwd):/workspace \
+            -w /workspace \
             --entrypoint sh \
             rtl433-temp-sensor \
-            -c "apk add --no-cache py3-pytest && pytest /workspace/tests/"
+            -c "apk add --no-cache py3-pytest && pytest tests/"
