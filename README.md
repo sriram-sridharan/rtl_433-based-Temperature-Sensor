@@ -65,6 +65,19 @@ The recommended way to run this container is via Docker Compose. I use this:
 
 I pair this healthcheck with [willfarrell/autoheal](https://github.com/willfarrell/autoheal) to automatically restart unhealthy containers. If you do this, don't forget to add `labels: ["autoheal=true"]` to the `433_temp` service.
 
+## Testing
+
+Unit tests cover the XML payload builder and HTTP retry logic. You need to install [pytest](https://pytest.org) first:
+```bash
+pip3 install pytest
+```
+Note: You may need to do this in a `venv`.
+  
+Once this is done, you can run the tests:
+```bash
+python3 -m pytest tests/ -v
+```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

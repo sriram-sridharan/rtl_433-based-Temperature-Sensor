@@ -1,1 +1,8 @@
 config.ini
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Pytest
+.pytest_cache/
