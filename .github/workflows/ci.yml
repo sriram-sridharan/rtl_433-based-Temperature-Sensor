@@ -1,0 +1,28 @@
+name: CI
+
+# Run on every push and PR targeting master
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Build the image exactly as you would in "production"
+      - name: Build Docker image
+        run: docker build -t rtl433-temp-sensor .
+
+      # Run tests inside the container so the environment matches production.
+      # py3-pytest is installed via apk (same package manager as the Dockerfile) and the repo is bind-mounted so the test files are accessible.
+      - name: Run tests in Docker container
+        run: |
+          docker run --rm \
+            -v $(pwd):/workspace \
+            --entrypoint sh \
+            rtl433-temp-sensor \
+            -c "apk add --no-cache py3-pytest && pytest /workspace/tests/"

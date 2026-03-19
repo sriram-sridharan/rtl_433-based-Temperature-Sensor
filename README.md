@@ -1,5 +1,7 @@
 # YATS - Yet Another Temperature Sensor Using rtl_433
 
+![CI](https://github.com/sriram-sridharan/rtl_433-based-Temperature-Sensor/actions/workflows/ci.yml/badge.svg)
+
 I got bored with creating wireless temperature sensors with ESP8266s, so I started looking for cooler projects in a similar vein. A few weeks ago, I came across a project called [rtl_433](https://github.com/merbanan/rtl_433) that uses [rtl_sdr](http://sdr.osmocom.org/trac/wiki/rtl-sdr) to decode certain wireless signals sent over the 433MHz ISM band.
 
 I'd previously seen references to rtl_sdr but did not pay much attention to the project. With the help of [RTL-SDR.com](https://www.rtl-sdr.com) and the [RTLSDR subreddit](https://www.reddit.com/r/RTLSDR/ "RTLSDR subreddit") I started digging into both projects and began my journey.
