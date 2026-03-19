@@ -36,6 +36,35 @@ Rename `config.ini.bak` to `config.ini`, add your sensor IDs and PRTG installati
 - You can force download the latest version of all dependencies by using the `--no-cache` flag.
 - Finally, you can push the freshly built image to your registry with: `docker push username/433-temp:latest`
 
+## Deploy
+
+The recommended way to run this container is via Docker Compose. I use this:
+
+```yaml
+433_temp:
+  container_name: 433_temp
+  # this is your username from the previous section
+  image: username/433-temp:latest
+  restart: always
+  logging:
+    options:
+      max-size: "10m"
+      max-file: "3"
+  devices:
+    - /dev/bus/usb:/dev/bus/usb
+  healthcheck:
+    # temp_simplified.py writes a heartbeat to /dev/shm (RAM) each time a reading is successfully processed
+    # /dev/shm is used to avoid unnecessary writes to the host SSD.
+    test: ["CMD-SHELL", "find /dev/shm/433_healthy -mmin -5 2>/dev/null | grep -q . || exit 1"]
+    interval: 2m
+    timeout: 10s
+    retries: 3
+    # allow time for the SDR dongle to initialize
+    start_period: 2m
+```
+
+I pair this healthcheck with [willfarrell/autoheal](https://github.com/willfarrell/autoheal) to automatically restart unhealthy containers. If you do this, don't forget to add `labels: ["autoheal=true"]` to the `433_temp` service.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

@@ -79,6 +79,9 @@ for line in sys.stdin:
         temperature = decoded['temperature_F']
         humidity = decoded['humidity']
         if time.time() - last_recorded[sensor_id] > 30:
+            # New heartbeat write to RAM
+            with open('/dev/shm/433_healthy', 'w') as f:
+                f.write(str(time.time()))
             last_recorded[sensor_id] = time.time()
             logging.info(f'Received data for sensor {sensor_id}: Temp={temperature}, Humidity={humidity}')
             send_data(sensor_id, temperature, humidity)
