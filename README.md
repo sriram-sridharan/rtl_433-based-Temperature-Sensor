@@ -54,6 +54,11 @@ The recommended way to run this container is via Docker Compose. I use this:
       max-file: "3"
   devices:
     - /dev/bus/usb:/dev/bus/usb
+  environment:
+    # Optional: pin to a specific RTL-SDR dongle by serial number.
+    # Useful when multiple dongles are present (e.g. one for ADS-B, one for 433MHz).
+    # Omit or leave blank to use the first available device.
+    - RTL_SERIAL=1337
   healthcheck:
     # temp_simplified.py writes a heartbeat to /dev/shm (RAM) each time a reading is successfully processed
     # /dev/shm is used to avoid unnecessary writes to the host SSD.
